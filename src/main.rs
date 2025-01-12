@@ -10,21 +10,13 @@ fn main() {
     }
     println!("Which temperature is it in Fahrenheit ? ");
     let mut temperature = String::new();
+    io::stdin().read_line(&mut temperature).expect("Unable to read user input \n");
+    let temperature = temperature.trim(); 
     println!("You entered {temperature} F");
-    io::stdin().read_line(&mut temperature).expect("Not nice");
-    let temperature:f32 = match temperature.trim().parse() {
-        Ok(value) => value,
-        Err(_) => -800.,
-    };
+
+    let temperature:f32 = temperature.parse().expect("Invalid Input, please provide a valid number \n"); 
     let temperature_in_celcius = fahrencius(temperature);
-
-    if temperature_in_celcius == fahrencius(-800.){
-        println!("There was probably an error when entering the temperature but here is the default Celcius value: {temperature_in_celcius} °C")
-    }
-
-    else {
-        println!("The corresponding temperature in degrees Celcius is: {temperature_in_celcius} °C");
-    }
+    println!("The corresponding temperature in degrees Celcius is: {temperature_in_celcius} °C");
 
 
 }
